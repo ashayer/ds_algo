@@ -5,14 +5,14 @@ import { withTRPC } from "@trpc/next";
 import { SessionProvider } from "next-auth/react";
 import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
+import Navbar from "../components/Navbar/Navbar";
 import type { AppRouter } from "../server/router";
 
-const MyApp: AppType = ({
-  Component,
-  pageProps: { session, ...pageProps },
-}) => {
+const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
     <SessionProvider session={session}>
+      <Navbar />
+
       <Component {...pageProps} />
     </SessionProvider>
   );
@@ -54,3 +54,4 @@ export default withTRPC<AppRouter>({
    */
   ssr: false,
 })(MyApp);
+

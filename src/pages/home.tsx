@@ -5,7 +5,7 @@ import { Grid } from "@mui/material";
 import GameCard from "../components/HomeCards/GameCard";
 import StatsCard from "../components/HomeCards/StatsCard";
 import AlgoCard from "../components/HomeCards/AlgoCard";
-import DataCard from "../components/HomeCards/StructureCard";
+import StructureCard from "../components/HomeCards/StructureCard";
 
 const HomeGridItem = ({ child }: { child: JSX.Element }) => (
   <Grid item xs={12} lg={6} sx={{ pt: 5, pr: 5, pl: 5 }}>
@@ -29,7 +29,7 @@ const Home: NextPage = () => {
       <GameCard />
       <StatsCard />
       <AlgoCard />
-      <DataCard />
+      <StructureCard />
     </HomeGridContainer>
   );
 };
