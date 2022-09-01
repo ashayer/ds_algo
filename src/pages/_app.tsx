@@ -7,13 +7,18 @@ import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
 import Navbar from "../components/Navbar/Navbar";
 import type { AppRouter } from "../server/router";
+import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material/styles";
+
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
 
 const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
     <SessionProvider session={session}>
-      <Navbar />
-
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <Navbar />
+        <Component {...pageProps} />
+      </ThemeProvider>
     </SessionProvider>
   );
 };

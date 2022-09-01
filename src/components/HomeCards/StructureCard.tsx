@@ -17,11 +17,6 @@ const StatsCard = () => {
             <Typography variant="h3">Read</Typography>
           </Button>
         </GridCardItem>
-        <GridCardItem width="45%" alignSelf="end">
-          <Button fullWidth variant="contained">
-            <Typography variant="h3">Sandbox</Typography>
-          </Button>
-        </GridCardItem>
       </Grid>
     </>
   );
