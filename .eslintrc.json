@@ -3,6 +3,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "eslint-config-next"],
   "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"]
 }
+
