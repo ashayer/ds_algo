@@ -36,11 +36,9 @@ const Navbar = () => {
       {/*spacer, probably unneeded */}
       <Grid item sx={{ flexGrow: 1 }} />
       {true && (
-        <Tooltip title="Delete">
-          <Grid item>
-            <AccountMenu />
-          </Grid>
-        </Tooltip>
+        <Grid item>
+          <AccountMenu />
+        </Grid>
       )}
     </Grid>
   );
