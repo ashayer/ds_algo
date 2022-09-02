@@ -5,15 +5,18 @@ import { NextPage } from "next";
 // import Signup from "../components/Signup/Signup";
 // import useStore from "../../stores/authStore";
 
-const LandingPage: NextPage = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  //const user = useStore((state) => state.isUser);
+import { useSession, signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
-  // useEffect(() => {
-  //   if (user) navigate("/home");
-  // });
+const LandingPage: NextPage = () => {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  if (session?.user) {
+    router.push({
+      pathname: "/home",
+    });
+  }
 
   return (
     <Grid
@@ -27,7 +30,7 @@ const LandingPage: NextPage = () => {
       maxWidth="md"
     >
       <Grid item sx={{ mt: 10 }}>
-        <Button variant="contained" onClick={handleOpen}>
+        <Button variant="contained" onClick={() => signIn("google", { callbackUrl: "/home" })}>
           <Typography>GET STARTED</Typography>
         </Button>
       </Grid>
