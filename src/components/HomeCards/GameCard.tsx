@@ -12,7 +12,8 @@ import {
 import { SelectChangeEvent } from "@mui/material";
 import styles from "./HomeCardsStyles";
 import GridCardItem from "./GameCardItem";
-
+import { Link as MUILink } from "@mui/material";
+import Link from "next/link";
 const GameCard = () => {
   const [gameLength, setGameLength] = useState("0");
   const handleLengthChange = (e: SelectChangeEvent) => {
@@ -44,9 +45,11 @@ const GameCard = () => {
           </FormControl>
         </GridCardItem>
         <GridCardItem alignSelf="end">
-          <Button variant="outlined" color="success">
-            <Typography variant="h3">Play</Typography>
-          </Button>
+          <Link href="/game" passHref>
+            <Button variant="outlined" color="success">
+              <Typography variant="h4">Play</Typography>
+            </Button>
+          </Link>
         </GridCardItem>
       </Grid>
     </>
