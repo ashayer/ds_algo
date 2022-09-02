@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import styles from "./HomeCardsStyles";
 import GridCardItem from "./GameCardItem";
+import Link from "next/link";
 // import { useNavigate } from "react-router-dom";
 // import useUserStore from "../../stores/userStore";
 // import useAuthStore from "../../stores/authStore";
@@ -92,9 +93,11 @@ const StatsCard = () => {
             </TableContainer>
           </GridCardItem>
           <GridCardItem alignSelf="end">
-            <Button variant="outlined">
-              <Typography variant="h3">LeaderBoard</Typography>
-            </Button>
+            <Link href="/leaderboard" passHref>
+              <Button variant="outlined" color="primary">
+                <Typography variant="h4">Leaderboard</Typography>
+              </Button>
+            </Link>
           </GridCardItem>
         </Grid>
       }

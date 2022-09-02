@@ -1,6 +1,7 @@
 import { Typography, Grid, Button, Divider } from "@mui/material";
 import styles from "./HomeCardsStyles";
 import GridCardItem from "./GameCardItem";
+import Link from "next/link";
 const StatsCard = () => {
   return (
     <>
@@ -13,9 +14,11 @@ const StatsCard = () => {
           {/* <Typography>{`${calculateCompletedReadingForData()}% Read`}</Typography> */}
         </GridCardItem>
         <GridCardItem width="45%" alignSelf="end">
-          <Button fullWidth variant="outlined" color="info">
-            <Typography variant="h3">Read</Typography>
-          </Button>
+          <Link href="/reading/structures" passHref>
+            <Button variant="outlined" color="primary">
+              <Typography variant="h4">Read</Typography>
+            </Button>
+          </Link>
         </GridCardItem>
       </Grid>
     </>
