@@ -1,4 +1,4 @@
-import { Button, Grid, IconButton, Typography } from "@mui/material";
+import { Button, Grid, IconButton, Tooltip, Typography } from "@mui/material";
 import styles from "./navbarStyles";
 // import useAuthStore from "../../stores/authStore";
 // import { useNavigate } from "react-router-dom";
@@ -26,19 +26,21 @@ const Navbar = () => {
 
   return (
     <Grid item container sx={{ ...styles.navBarContainer }} xs={11}>
-      <Grid item sx={{ flexGrow: 1 }}>
+      <Grid item>
         <Link href="/home" passHref>
           <MUILink sx={{ textDecoration: "none" }}>
             <Typography variant="h2">DS ALGO</Typography>
           </MUILink>
         </Link>
       </Grid>
+      {/*spacer, probably unneeded */}
+      <Grid item sx={{ flexGrow: 1 }} />
       {true && (
-        <>
+        <Tooltip title="Delete">
           <Grid item>
             <AccountMenu />
           </Grid>
-        </>
+        </Tooltip>
       )}
     </Grid>
   );
