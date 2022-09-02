@@ -1,6 +1,5 @@
 const styles = {
   navBarContainer: {
-    backgroundColor: "white",
     alignItems: "center",
     borderBottom: "10px solid #2B2A2A",
     marginInline: "auto",
