@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { trpc } from "../utils/trpc";
-import { Grid } from "@mui/material";
+import { Grid, Tooltip, Typography } from "@mui/material";
 import GameCard from "../components/HomeCards/GameCard";
 import StatsCard from "../components/HomeCards/StatsCard";
 import AlgoCard from "../components/HomeCards/AlgoCard";
