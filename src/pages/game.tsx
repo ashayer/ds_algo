@@ -22,7 +22,7 @@ import { Grid, Button, Container, Box } from "@mui/material";
 //   }
 // };
 
-let highestStreak = 0;
+// let highestStreak = 0;
 const Game = () => {
   //   const [gameStarted, setGameStarted] = useState(false);
   //   const [questionInfo, setQuestionInfo] = useState<GameQuestionInfo>(gameQuestionList[0]);
