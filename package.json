@@ -21,6 +21,7 @@
     "@trpc/next": "^9.27.2",
     "@trpc/react": "^9.27.2",
     "@trpc/server": "^9.27.2",
+    "d3-array": "^3.2.0",
     "immer": "^9.0.15",
     "next": "12.2.5",
     "next-auth": "^4.10.3",
@@ -32,6 +33,7 @@
     "zod": "^3.18.0"
   },
   "devDependencies": {
+    "@types/d3-array": "^3.0.3",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
