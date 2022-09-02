@@ -10,8 +10,9 @@ import { Grid } from "@mui/material";
 // import * as codeString from "../../assets/AlgoStrings";
 // import CodeBlock from "../../components/CodeBlock/CodeBlock";
 import { SelectChangeEvent } from "@mui/material/Select";
+import type { NextPage } from "next";
 
-const AlgoSandbox = () => {
+const AlgoSandbox: NextPage = () => {
   // const [algorithm, setAlgorithm] = useState<string>("3");
   // const arraySize = useRef<number>(10);
   // const [arrayElements, setArrayElements] = useState<SortHistoryElement[]>([]);

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Box, Button, Grid } from "@mui/material";
+import type { NextPage } from "next";
 
 // const getUserStructureReading = async (id: string) => {
 //   const response = await axios.get(`/api/user/getStructureReading/${id}`);
 //   return response.data;
 // };
 
-const StructureReading = () => {
+const StructureReading: NextPage = () => {
   const [sectionNum, setSectionNum] = useState<number>(0);
   //   const id = useAuthStore((state) => state.id);
   const [sectionArray, setSectionArray] = useState<any>([]);
@@ -30,6 +31,7 @@ const StructureReading = () => {
 
   return (
     <Box maxWidth="xl" sx={{ marginInline: "auto", mt: 2 }}>
+      <>ddddd</>
       {/* {isSuccess && !isLoading && sectionArray.length > 0 && (
         <>
           <DataStructureAccordion

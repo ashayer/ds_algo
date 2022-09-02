@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Grid, Typography, Button, Dialog } from "@mui/material";
+import { NextPage } from "next";
 // import { useNavigate } from "react-router-dom";
 // import Signup from "../components/Signup/Signup";
 // import useStore from "../../stores/authStore";
 
-const LandingPage = () => {
+const LandingPage: NextPage = () => {
   const [open, setOpen] = useState<boolean>(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

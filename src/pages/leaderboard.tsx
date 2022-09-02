@@ -14,6 +14,7 @@ import {
   Grid,
 } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
+import { NextPage } from "next";
 // import { useQuery } from "@tanstack/react-query";
 // import axios from "axios";
 
@@ -111,7 +112,7 @@ function EnhancedTableHead(props: any) {
   );
 }
 
-const LoadingLeaderboard = () => {
+const LoadingLeaderboard: NextPage = () => {
   return (
     <Box
       sx={{

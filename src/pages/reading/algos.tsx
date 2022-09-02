@@ -11,8 +11,9 @@ import { Box, Button, Grid } from "@mui/material";
 //   const response = await axios.get(`/api/user/getAlgoReading/${id}`);
 //   return response.data;
 // };
+import type { NextPage } from "next";
 
-const AlgoReading = () => {
+const AlgoReading: NextPage = () => {
   const [sectionNum, setSectionNum] = useState<number>(0);
   // const id = useAuthStore((state) => state.id);
   const [sectionArray, setSectionArray] = useState<any>([]);
@@ -36,6 +37,7 @@ const AlgoReading = () => {
 
   return (
     <Box maxWidth="xl" sx={{ marginInline: "auto", mt: 2 }}>
+      <>asdasdasda</>
       {/* {isSuccess && !isLoading && sectionArray.length > 0 && (
         <>
           <SortingAlgorithmAccordion
