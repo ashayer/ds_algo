@@ -4,9 +4,11 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
+
 model Account {
   id                String  @id @default(auto()) @map("_id") @db.ObjectId
   userId            String
@@ -20,9 +22,11 @@ model Account {
   scope             String?
   id_token          String? @db.String
   session_state     String?
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([provider, providerAccountId])
 }
+
 model Session {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique
@@ -30,18 +34,34 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
-  email         String?   @unique
+  email         String?         @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  UserGameStats UserGameStats[]
 }
+
 model VerificationToken {
   identifier String   @id @default(auto()) @map("_id") @db.ObjectId
   token      String   @unique
   expires    DateTime
+
   @@unique([identifier, token])
+}
+
+model UserGameStats {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String
+  gamesplayed   Int  @default(0)
+  points        Int  @default(0)
+  rightanswer   Int  @default(0)
+  wronganswer   Int  @default(0)
+  responsetime  Int  @default(0)
+  higheststreak Int  @default(0)
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

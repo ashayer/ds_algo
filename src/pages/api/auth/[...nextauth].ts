@@ -15,15 +15,32 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
+    async signIn({ user }) {
+      // check if user has already created account
+
+      const exists = await prisma.userGameStats.findFirst({
+        where: {
+          userId: user.id,
+        },
+      });
+
+      if (!exists) {
+        await prisma.userGameStats.create({
+          data: {
+            userId: user.id,
+          },
+        });
+      }
+
+      return true;
+    },
   },
-  // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
-    // ...add more providers here
   ],
 };
 
