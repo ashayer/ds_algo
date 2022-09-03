@@ -1,4 +1,5 @@
 // src/pages/_app.tsx
+import { useState, useMemo, createContext } from "react";
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
 import { loggerLink } from "@trpc/client/links/loggerLink";
 import { withTRPC } from "@trpc/next";
@@ -8,17 +9,44 @@ import superjson from "superjson";
 import Navbar from "../components/Navbar/Navbar";
 import type { AppRouter } from "../server/router";
 import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
 
-let theme = createTheme();
-theme = responsiveFontSizes(theme);
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
+  const [mode, setMode] = useState<"light" | "dark">("dark");
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+      },
+    }),
+    [],
+  );
+
+  let theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+
+    [mode],
+  );
+
+  theme = responsiveFontSizes(theme);
+
   return (
     <SessionProvider session={session}>
-      <ThemeProvider theme={theme}>
-        <Navbar />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ColorModeContext.Provider value={colorMode}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Navbar />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ColorModeContext.Provider>
     </SessionProvider>
   );
 };

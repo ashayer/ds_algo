@@ -7,9 +7,17 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import { signOut, useSession } from "next-auth/react";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import { ColorModeContext } from "../../pages/_app";
+import { useContext } from "react";
+import { useTheme } from "@mui/material/styles";
 
 const AccountMenu = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const colorMode = useContext(ColorModeContext);
+  const theme = useTheme();
+
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -71,6 +79,9 @@ const AccountMenu = () => {
           </ListItemIcon>
           Logout
         </MenuItem>
+        <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+          {theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+        </IconButton>
       </Menu>
     </>
   );

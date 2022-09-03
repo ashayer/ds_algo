@@ -1,19 +1,14 @@
-import { Button, Grid, IconButton, Tooltip, Typography } from "@mui/material";
+import { useContext, createContext } from "react";
+import { Box, Button, Grid, IconButton, Tooltip, Typography } from "@mui/material";
 import styles from "./navbarStyles";
-// import useAuthStore from "../../stores/authStore";
-// import { useNavigate } from "react-router-dom";
-// import AccountBoxIcon from "@mui/icons-material/AccountBox";
-// import axios from "axios";
-// import SearchIcon from "@mui/icons-material/Search";
-import { useRouter } from "next/router";
 import { Link as MUILink } from "@mui/material";
 import Link from "next/link";
 import AccountMenu from "../AccountMenu/AccountMenu";
 import { signOut, useSession } from "next-auth/react";
 
+
 const Navbar = () => {
   const { data: session } = useSession();
-
   return (
     <>
       {session?.user && (

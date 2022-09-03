@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { Grid, Button, Container, Box } from "@mui/material";
-// import gameQuestionList from "../../utils/gameQuestionList";
-// import gameHandler from "../../utils/GameHandlers/gameHandler";
-// import GameQuestionAnswerChoice from "../../components/GameQuestionAnswerChoice/GameQuestionAnswerChoice";
-// import GameQuestionContent from "../../components/GameQuestionContent/GameQuestionContent";
-// import GameQuestionText from "../../components/GameQuestionText/GameQuestionText";
-// import UserStatsTable from "../../components/UserStatsTable/UserStatsTable";
+import gameQuestionList from "../utils/gameQuestionList";
+import gameHandler from "../utils/GameHandlers/gameHandler";
+import GameQuestionAnswerChoice from "../components/GameQuestionAnswerChoice/GameQuestionAnswerChoice";
+import GameQuestionContent from "../components/GameQuestionContent/GameQuestionContent";
+import GameQuestionText from "../components/GameQuestionText/GameQuestionText";
+import UserStatsTable from "../components/UserStatsTable/UserStatsTable";
+import produce from "immer";
 // import useUserStore from "../../stores/userStore";
-// import produce from "immer";
 // import useAuthStore from "../../stores/authStore";
 // import axios from "axios";
 
@@ -24,24 +24,19 @@ import { Grid, Button, Container, Box } from "@mui/material";
 
 // let highestStreak = 0;
 const Game = () => {
-  //   const [gameStarted, setGameStarted] = useState(false);
-  //   const [questionInfo, setQuestionInfo] = useState<GameQuestionInfo>(gameQuestionList[0]);
-  //   const [questionDisplay, setQuestionDisplay] = useState<GameDisplayInfo>();
-  //   const sessionGameStats = useUserStore((state) => state.sessionGameStats);
-  //   const setSessionGameStats = useUserStore((state) => state.setSessionGameStats);
+  const [gameStarted, setGameStarted] = useState(false);
+  const [questionInfo, setQuestionInfo] = useState<GameQuestionInfo>(gameQuestionList[0]);
+  const [questionDisplay, setQuestionDisplay] = useState<GameDisplayInfo>();
+  const [sessionGameStats, setSessionGameStats] = useState();
   //   const setGameHasStarted = useUserStore((state) => state.setGameHasStarted);
-  //   const userId = useAuthStore((state) => state.id);
-  //   const gameStats = useUserStore((state) => state.gameStats);
-  //   const setGameStats = useUserStore((state) => state.setGameStats);
 
-  //   const questionStartTime = new Date();
+  const questionStartTime = new Date();
 
-  //   const onGameStart = () => {
-  //     const randomIndex = Math.floor(Math.random() * gameQuestionList.length);
-  //     setQuestionInfo(gameQuestionList[randomIndex]);
-  //     setGameStarted(true);
-  //     setGameHasStarted(true);
-  //   };
+  const onGameStart = () => {
+    const randomIndex = Math.floor(Math.random() * gameQuestionList.length);
+    setQuestionInfo(gameQuestionList[randomIndex]);
+    setGameStarted(true);
+  };
 
   //   const calculateUpdate = () => {
   //     const totalQuestions = sessionGameStats.numCorrect + sessionGameStats.numWrong;
@@ -63,11 +58,11 @@ const Game = () => {
   //     }
   //   };
 
-  //   const isHighestStreak = () => {
-  //     if (sessionGameStats.streak > highestStreak) {
-  //       highestStreak = sessionGameStats.streak;
-  //     }
-  //   };
+  // const isHighestStreak = () => {
+  //   if (sessionGameStats.streak > highestStreak) {
+  //     highestStreak = sessionGameStats.streak;
+  //   }
+  // };
 
   //   const onGameEnd = () => {
   //     calculateUpdate();
