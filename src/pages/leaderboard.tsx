@@ -169,12 +169,12 @@ const Leaderboard: NextPage = () => {
                   .slice()
                   .sort(getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
+                  .map((row, index) => {
                     return (
-                      <TableRow hover tabIndex={-1} key={row.user.id}>
+                      <TableRow hover tabIndex={-1} key={index}>
                         <TableCell component="th" scope="row">
                           <Typography noWrap sx={{ width: "15vw" }}>
-                            {row.user.name}
+                            {row.name}
                           </Typography>
                         </TableCell>
                         <TableCell align="right" id="points">

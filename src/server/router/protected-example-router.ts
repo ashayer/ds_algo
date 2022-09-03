@@ -15,7 +15,7 @@ export const protectedExampleRouter = createProtectedRouter()
   })
   .query("get-all-user-stats", {
     async resolve() {
-      const userStats = prisma.userGameStats.findMany({
+      const userStats = await prisma.user.findMany({
         select: {
           gamesplayed: true,
           points: true,
@@ -23,7 +23,7 @@ export const protectedExampleRouter = createProtectedRouter()
           wronganswer: true,
           responsetime: true,
           higheststreak: true,
-          user: true,
+          name: true,
         },
       });
 

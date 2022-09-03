@@ -36,27 +36,32 @@ model Session {
 }
 
 model User {
-  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
-  email         String?         @unique
+  email         String?   @unique
   emailVerified DateTime?
   image         String?
+  gamesplayed   Int       @default(0)
+  points        Int       @default(0)
+  rightanswer   Int       @default(0)
+  wronganswer   Int       @default(0)
+  responsetime  Int       @default(0)
+  higheststreak Int       @default(0)
   accounts      Account[]
   sessions      Session[]
-  UserGameStats UserGameStats[]
 }
 
-model UserGameStats {
-  id            String @id @default(auto()) @map("_id") @db.ObjectId
-  gamesplayed   Int    @default(0)
-  points        Int    @default(0)
-  rightanswer   Int    @default(0)
-  wronganswer   Int    @default(0)
-  responsetime  Int    @default(0)
-  higheststreak Int    @default(0)
-  user          User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId        String
-}
+// model UserGameStats {
+//   id            String @id @default(auto()) @map("_id") @db.ObjectId
+//   gamesplayed   Int    @default(0)
+//   points        Int    @default(0)
+//   rightanswer   Int    @default(0)
+//   wronganswer   Int    @default(0)
+//   responsetime  Int    @default(0)
+//   higheststreak Int    @default(0)
+//   user          User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   userId        String
+// }
 
 model VerificationToken {
   identifier String   @id @default(auto()) @map("_id") @db.ObjectId
