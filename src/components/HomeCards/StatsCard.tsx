@@ -10,7 +10,6 @@ import {
   TableRow,
   Divider,
 } from "@mui/material";
-import styles from "./HomeCardsStyles";
 import GridCardItem from "./GameCardItem";
 import Link from "next/link";
 // import { useNavigate } from "react-router-dom";
@@ -52,7 +51,15 @@ const StatsCard = () => {
       </Typography>
       <Divider />
       {
-        <Grid container sx={{ ...styles.homeCardContainer }}>
+        <Grid
+          container
+          sx={{
+            alignItems: "center",
+            direction: "column",
+            minHeight: "30vh",
+            justifyContent: "space-around",
+          }}
+        >
           <GridCardItem>{/* <Typography variant="h5">{`${username}`}</Typography> */}</GridCardItem>
           <GridCardItem>
             <TableContainer>

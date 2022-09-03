@@ -11,7 +11,6 @@ import {
   Tooltip,
 } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material";
-import styles from "./HomeCardsStyles";
 import GridCardItem from "./GameCardItem";
 import Link from "next/link";
 const GameCard = () => {
@@ -25,7 +24,15 @@ const GameCard = () => {
         GAME
       </Typography>
       <Divider />
-      <Grid container sx={{ ...styles.homeCardContainer }}>
+      <Grid
+        container
+        sx={{
+          alignItems: "center",
+          direction: "column",
+          minHeight: "30vh",
+          justifyContent: "space-around",
+        }}
+      >
         <GridCardItem>
           <Typography variant="h5">Game Options</Typography>
         </GridCardItem>

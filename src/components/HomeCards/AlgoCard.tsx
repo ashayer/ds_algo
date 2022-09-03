@@ -1,7 +1,6 @@
 import { Typography, Grid, Button, Divider } from "@mui/material";
 import GridCardItem from "./GameCardItem";
 import Link from "next/link";
-import styles from "./HomeCardsStyles";
 
 const StatsCard = () => {
   return (
@@ -10,7 +9,15 @@ const StatsCard = () => {
         SORTING ALGORITHMS
       </Typography>
       <Divider />
-      <Grid container sx={{ ...styles.homeCardContainer }}>
+      <Grid
+        container
+        sx={{
+          alignItems: "center",
+          direction: "column",
+          minHeight: "30vh",
+          justifyContent: "space-around",
+        }}
+      >
         <GridCardItem>
           {/* <Typography>{`${calculateCompletedReadingForAlgo()}% Read`}</Typography> */}
         </GridCardItem>
