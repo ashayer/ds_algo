@@ -15,8 +15,7 @@ import {
 } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
 import { NextPage } from "next";
-// import { useQuery } from "@tanstack/react-query";
-// import axios from "axios";
+import { trpc } from "../utils/trpc";
 
 function descendingComparator(a: any, b: any, orderBy: any) {
   if (b[orderBy] < a[orderBy]) {
@@ -28,7 +27,7 @@ function descendingComparator(a: any, b: any, orderBy: any) {
   return 0;
 }
 
-function getComparator(order: any, orderBy: any) {
+function getComparator(order: string, orderBy: string) {
   return order === "desc"
     ? (a: any, b: any) => descendingComparator(a, b, orderBy)
     : (a: any, b: any) => -descendingComparator(a, b, orderBy);
@@ -91,7 +90,7 @@ function EnhancedTableHead(props: any) {
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
-            sortDirection={orderBy === headCell.id ? order : false}
+            sortDirection={orderBy === headCell.id ? order : "asc"}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -112,7 +111,7 @@ function EnhancedTableHead(props: any) {
   );
 }
 
-const LoadingLeaderboard: NextPage = () => {
+const LoadingLeaderboard = () => {
   return (
     <Box
       sx={{
@@ -128,12 +127,7 @@ const LoadingLeaderboard: NextPage = () => {
   );
 };
 
-// const getUserStats = async () => {
-//   const response = await axios.get("/api/user/getUsersGameStats");
-//   return response.data;
-// };
-
-const Leaderboard = () => {
+const Leaderboard: NextPage = () => {
   const [order, setOrder] = useState("desc");
   const [orderBy, setOrderBy] = useState("points");
   const [page, setPage] = useState(0);
@@ -154,15 +148,13 @@ const Leaderboard = () => {
     setPage(0);
   };
 
-  //   const { data, isSuccess, isLoading, isError } = useQuery(["user-leaderboard"], getUserStats, {
-  //     keepPreviousData: true,
-  //   });
+  const userStats = trpc.useQuery(["auth.get-all-user-stats"]);
+
+  if (userStats.isLoading) return <LoadingLeaderboard />;
 
   return (
     <>
-      {false ? (
-        <LoadingLeaderboard />
-      ) : (
+      {userStats.data && (
         <Grid item container xs={10} sx={{ marginInline: "auto", mt: 5 }}>
           <TableContainer>
             <Table>
@@ -170,56 +162,45 @@ const Leaderboard = () => {
                 order={order}
                 orderBy={orderBy}
                 onRequestSort={handleRequestSort}
-                // rowCount={data.length}
-                rowCount={10}
+                rowCount={userStats.data.length}
               />
               <TableBody sx={{ overflow: "scroll" }}>
-                {/* {data
+                {userStats.data
                   .slice()
                   .sort(getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row: any) => {
+                  .map((row) => {
                     return (
-                      <TableRow hover tabIndex={-1} key={row.username}>
+                      <TableRow hover tabIndex={-1} key={row.user.id}>
                         <TableCell component="th" scope="row">
                           <Typography noWrap sx={{ width: "15vw" }}>
-                            {row.username}
+                            {row.user.name}
                           </Typography>
                         </TableCell>
                         <TableCell align="right" id="points">
                           <Typography>{row.points}</Typography>
                         </TableCell>
                         <TableCell align="right">
-                          <Typography>{row.gamesPlayed}</Typography>
+                          <Typography>{row.gamesplayed}</Typography>
                         </TableCell>
                         <TableCell align="right">
-                          <Typography>{row.streak}</Typography>
+                          <Typography>{row.higheststreak}</Typography>
                         </TableCell>
                         <TableCell align="right">
-                          <Typography>{row.numCorrect}</Typography>
+                          <Typography>{row.rightanswer}</Typography>
                         </TableCell>
                         <TableCell align="right">
-                          <Typography>{row.numWrong}</Typography>
+                          <Typography>{row.wronganswer}</Typography>
                         </TableCell>
                         <TableCell align="right">
-                          <Typography>{row.responseTime}</Typography>
+                          <Typography>{row.responsetime}</Typography>
                         </TableCell>
                       </TableRow>
                     );
-                  })} */}
-                {/* {emptyRows > 0 && (
-                  <TableRow
-                    style={{
-                      height: 53 * emptyRows,
-                    }}
-                  >
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )} */}
+                  })}
               </TableBody>
             </Table>
           </TableContainer>
-
           <TablePagination
             rowsPerPageOptions={[10, 15, 20]}
             component="div"

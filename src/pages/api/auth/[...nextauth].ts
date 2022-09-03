@@ -15,25 +15,6 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-    async signIn({ user }) {
-      // check if user has already created account
-
-      const exists = await prisma.userGameStats.findFirst({
-        where: {
-          userId: user.id,
-        },
-      });
-
-      if (!exists) {
-        await prisma.userGameStats.create({
-          data: {
-            userId: user.id,
-          },
-        });
-      }
-
-      return true;
-    },
   },
   adapter: PrismaAdapter(prisma),
   providers: [
