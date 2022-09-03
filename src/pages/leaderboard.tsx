@@ -204,8 +204,7 @@ const Leaderboard: NextPage = () => {
           <TablePagination
             rowsPerPageOptions={[10, 15, 20]}
             component="div"
-            count={10}
-            // count={data.length}
+            count={userStats.data.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
