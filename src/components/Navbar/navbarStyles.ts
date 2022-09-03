@@ -1,7 +1,7 @@
 const styles = {
   navBarContainer: {
     alignItems: "center",
-    borderBottom: "10px solid #2B2A2A",
+    borderBottom: "10px solid",
     marginInline: "auto",
   },
   navBarIsUserBox: {
