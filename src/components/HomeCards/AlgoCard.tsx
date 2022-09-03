@@ -1,7 +1,8 @@
 import { Typography, Grid, Button, Divider } from "@mui/material";
-import styles from "./homeCardsStyles";
 import GridCardItem from "./GameCardItem";
 import Link from "next/link";
+import styles from "./homeCardsStyles";
+
 const StatsCard = () => {
   return (
     <>
