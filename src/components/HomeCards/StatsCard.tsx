@@ -14,16 +14,6 @@ import GridCardItem from "./GameCardItem";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { trpc } from "../../utils/trpc";
-// import { useNavigate } from "react-router-dom";
-// import useUserStore from "../../stores/userStore";
-// import useAuthStore from "../../stores/authStore";
-// import { useQuery } from "@tanstack/react-query";
-// import axios from "axios";
-
-// const getUserStats = async (id: string) => {
-//   const response = await axios.get(`/api/user/getUserStats/${id}`);
-//   return response.data;
-// };
 
 const StatsCard = () => {
   const { data: session } = useSession();
