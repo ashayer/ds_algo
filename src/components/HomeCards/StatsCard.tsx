@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 import GridCardItem from "./GameCardItem";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { trpc } from "../../utils/trpc";
 // import { useNavigate } from "react-router-dom";
 // import useUserStore from "../../stores/userStore";
 // import useAuthStore from "../../stores/authStore";
@@ -24,25 +26,17 @@ import Link from "next/link";
 // };
 
 const StatsCard = () => {
-  // const navigate = useNavigate();
-  // const username = useAuthStore((state) => state.username);
-  // const id = useAuthStore((state) => state.id);
-  // const setGameStats = useUserStore((state) => state.setGameStats);
+  const { data: session } = useSession();
 
-  // const {
-  //   data: gameStats,
-  //   isLoading,
-  //   isSuccess,
-  //   isError,
-  // } = useQuery(["user-stats"], () => getUserStats(id), { onSuccess: setGameStats });
+  const gameStats = trpc.useQuery(["auth.get-user-stats", { id: session?.user?.id as string }]);
 
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (gameStats.isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  // if (isError) {
-  //   return <div>Error</div>;
-  // }
+  if (gameStats.isError) {
+    return <div>Error</div>;
+  }
 
   return (
     <>
@@ -60,7 +54,9 @@ const StatsCard = () => {
             justifyContent: "space-around",
           }}
         >
-          <GridCardItem>{/* <Typography variant="h5">{`${username}`}</Typography> */}</GridCardItem>
+          <GridCardItem>
+            <Typography variant="h5">{`${gameStats.data?.name}`}</Typography>
+          </GridCardItem>
           <GridCardItem>
             <TableContainer>
               <Table size="small">
@@ -88,12 +84,12 @@ const StatsCard = () => {
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    {/* <TableCell align="center">{`${gameStats.points}`}</TableCell>
-                    <TableCell align="center">{`${gameStats.gamesPlayed}`}</TableCell>
-                    <TableCell align="center">{`${gameStats.streak}`}</TableCell>
-                    <TableCell align="center">{`${gameStats.numCorrect}`}</TableCell>
-                    <TableCell align="center">{`${gameStats.numWrong}`}</TableCell>
-                    <TableCell align="center">{`${gameStats.responseTime}`}</TableCell> */}
+                    <TableCell align="center">{`${gameStats.data?.points}`}</TableCell>
+                    <TableCell align="center">{`${gameStats.data?.gamesplayed}`}</TableCell>
+                    <TableCell align="center">{`${gameStats.data?.higheststreak}`}</TableCell>
+                    <TableCell align="center">{`${gameStats.data?.rightanswer}`}</TableCell>
+                    <TableCell align="center">{`${gameStats.data?.wronganswer}`}</TableCell>
+                    <TableCell align="center">{`${gameStats.data?.responsetime}`}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
