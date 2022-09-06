@@ -7,6 +7,9 @@ import GameQuestionContent from "../components/GameQuestionContent/GameQuestionC
 import GameQuestionText from "../components/GameQuestionText/GameQuestionText";
 import UserStatsTable from "../components/UserStatsTable/UserStatsTable";
 import produce from "immer";
+import { useSession } from "next-auth/react";
+import { trpc } from "../utils/trpc";
+
 // import useUserStore from "../../stores/userStore";
 // import useAuthStore from "../../stores/authStore";
 // import axios from "axios";
@@ -22,13 +25,21 @@ import produce from "immer";
 //   }
 // };
 
-// let highestStreak = 0;
 const Game = () => {
-  const [gameStarted, setGameStarted] = useState(false);
+  const { data: session } = useSession();
+  let higheststreak = 0;
+  const [gameStarted, setGameStarted] = useState(true);
   const [questionInfo, setQuestionInfo] = useState<GameQuestionInfo>(gameQuestionList[0]);
   const [questionDisplay, setQuestionDisplay] = useState<GameDisplayInfo>();
-  const [sessionGameStats, setSessionGameStats] = useState();
+  const [sessionGameStats, setSessionGameStats] = useState<SessionGameStats>({
+    points: 0,
+    numCorrect: 0,
+    numWrong: 0,
+    responseTime: 0,
+    streak: 0,
+  });
   //   const setGameHasStarted = useUserStore((state) => state.setGameHasStarted);
+  const gameStats = trpc.useQuery(["auth.get-user-stats", { id: session?.user?.id as string }]);
 
   const questionStartTime = new Date();
 
@@ -38,99 +49,100 @@ const Game = () => {
     setGameStarted(true);
   };
 
-  //   const calculateUpdate = () => {
-  //     const totalQuestions = sessionGameStats.numCorrect + sessionGameStats.numWrong;
-  //     if (totalQuestions > 0) {
-  //       let averageResponseTime = Math.floor(sessionGameStats.responseTime / totalQuestions);
-  //       const lifeTimeAverage = Math.floor(
-  //         (gameStats.responseTime + averageResponseTime) / gameStats.gamesPlayed,
-  //       );
-  //       const nextState = produce(gameStats, (draftState) => {
-  //         draftState.gamesPlayed += 1;
-  //         draftState.points += sessionGameStats.points;
-  //         draftState.numCorrect += sessionGameStats.numCorrect;
-  //         draftState.numWrong += sessionGameStats.numWrong;
-  //         draftState.responseTime = lifeTimeAverage;
-  //         draftState.streak = highestStreak;
-  //       });
-  //       setGameStats(nextState);
-  //       updateUserPoints(userId, nextState);
-  //     }
-  //   };
+  const calculateUpdate = () => {
+    if (gameStats.isSuccess && gameStats.data) {
+      const totalQuestions = sessionGameStats.numCorrect + sessionGameStats.numWrong;
+      if (totalQuestions > 0) {
+        const averageResponseTime = Math.floor(sessionGameStats.responseTime / totalQuestions);
+        const lifeTimeAverage = Math.floor(
+          (gameStats.data.responsetime + averageResponseTime) / gameStats.data.gamesplayed,
+        );
+        const nextState = produce(gameStats.data, (draftState) => {
+          draftState.gamesplayed += 1;
+          draftState.points += sessionGameStats.points;
+          draftState.rightanswer += sessionGameStats.numCorrect;
+          draftState.wronganswer += sessionGameStats.numWrong;
+          draftState.responsetime = lifeTimeAverage;
+          draftState.higheststreak = higheststreak;
+        });
+        // setGameStats(nextState);
+        // updateUserPoints(userId, nextState);
+      }
+    }
+  };
 
-  // const isHighestStreak = () => {
-  //   if (sessionGameStats.streak > highestStreak) {
-  //     highestStreak = sessionGameStats.streak;
-  //   }
-  // };
+  const isHighestStreak = () => {
+    if (sessionGameStats.streak > higheststreak) {
+      higheststreak = sessionGameStats.streak;
+    }
+  };
 
-  //   const onGameEnd = () => {
-  //     calculateUpdate();
-  //     const nextState = produce(sessionGameStats, (draftState) => {
-  //       draftState.numCorrect = 0;
-  //       draftState.streak = 0;
-  //       draftState.points = 0;
-  //       draftState.responseTime = 0;
-  //       draftState.numWrong = 0;
-  //     });
-  //     highestStreak = 0;
-  //     setSessionGameStats(nextState);
-  //     setGameHasStarted(false);
-  //     setGameStarted(false);
-  //   };
+  const onGameEnd = () => {
+    calculateUpdate();
+    const nextState = produce(sessionGameStats, (draftState) => {
+      draftState.numCorrect = 0;
+      draftState.streak = 0;
+      draftState.points = 0;
+      draftState.responseTime = 0;
+      draftState.numWrong = 0;
+    });
+    higheststreak = 0;
+    setSessionGameStats(nextState);
+    setGameStarted(false);
+  };
 
-  //   const generateNextQuestion = useCallback(() => {
-  //     const randomIndex = Math.floor(Math.random() * gameQuestionList.length);
-  //     setQuestionInfo(gameQuestionList[randomIndex]);
-  //   }, []);
+  const generateNextQuestion = useCallback(() => {
+    const randomIndex = Math.floor(Math.random() * gameQuestionList.length);
+    setQuestionInfo(gameQuestionList[randomIndex]);
+  }, []);
 
-  //   const calculatePoints = () => {
-  //     // if streak over 3 then add 10 to (streak - 3) * 1.67
-  //     let updatePointsBy = 0;
-  //     if (sessionGameStats.streak > 3) {
-  //       updatePointsBy = 10 + (sessionGameStats.streak - 3) * 1.67;
-  //     } else {
-  //       updatePointsBy = 10;
-  //     }
-  //     return Math.floor(updatePointsBy);
-  //   };
+  const calculatePoints = () => {
+    // if streak over 3 then add 10 to (streak - 3) * 1.67
+    let updatePointsBy = 0;
+    if (sessionGameStats.streak > 3) {
+      updatePointsBy = 10 + (sessionGameStats.streak - 3) * 1.67;
+    } else {
+      updatePointsBy = 10;
+    }
+    return Math.floor(updatePointsBy);
+  };
 
-  //   const answeredCorrect = () => {
-  //     const questionEndTime = new Date();
-  //     const updatePointsBy = calculatePoints();
-  //     const nextState = produce(sessionGameStats, (draftState) => {
-  //       draftState.numCorrect += 1;
-  //       draftState.streak += 1;
-  //       draftState.points += updatePointsBy;
-  //       draftState.responseTime += questionEndTime.getTime() - questionStartTime.getTime();
-  //     });
-  //     isHighestStreak();
-  //     setSessionGameStats(nextState);
-  //     generateNextQuestion();
-  //   };
+  const answeredCorrect = () => {
+    const questionEndTime = new Date();
+    const updatePointsBy = calculatePoints();
+    const nextState = produce(sessionGameStats, (draftState) => {
+      draftState.numCorrect += 1;
+      draftState.streak += 1;
+      draftState.points += updatePointsBy;
+      draftState.responseTime += questionEndTime.getTime() - questionStartTime.getTime();
+    });
+    isHighestStreak();
+    setSessionGameStats(nextState);
+    generateNextQuestion();
+  };
 
-  //   const answeredWrong = () => {
-  //     const questionEndTime = new Date();
-  //     const updatePointsBy = calculatePoints();
-  //     const nextState = produce(sessionGameStats, (draftState) => {
-  //       draftState.numWrong += 1;
-  //       draftState.streak = 0;
-  //       draftState.points += updatePointsBy;
-  //       draftState.responseTime += questionEndTime.getTime() - questionStartTime.getTime();
-  //     });
-  //     setSessionGameStats(nextState);
-  //     generateNextQuestion();
-  //   };
+  const answeredWrong = () => {
+    const questionEndTime = new Date();
+    const updatePointsBy = calculatePoints();
+    const nextState = produce(sessionGameStats, (draftState) => {
+      draftState.numWrong += 1;
+      draftState.streak = 0;
+      draftState.points += updatePointsBy;
+      draftState.responseTime += questionEndTime.getTime() - questionStartTime.getTime();
+    });
+    setSessionGameStats(nextState);
+    generateNextQuestion();
+  };
 
-  //   useEffect(() => {
-  //     setQuestionDisplay(gameHandler(questionInfo as GameQuestionInfo));
-  //   }, [questionInfo]);
+  useEffect(() => {
+    setQuestionDisplay(gameHandler(questionInfo as GameQuestionInfo));
+  }, [questionInfo]);
 
   return (
     <>
-      {/* {gameStarted && questionDisplay ? (
+      {gameStarted && questionDisplay ? (
         <Grid item container sx={{ marginInline: "auto" }}>
-          <UserStatsTable />
+          <UserStatsTable sessionGameStats={sessionGameStats}/>
           <GameQuestionText questionDisplay={questionDisplay} />
           <GameQuestionContent
             questionDisplay={questionDisplay}
@@ -165,7 +177,7 @@ const Game = () => {
             </Button>
           </Grid>
         </>
-      )} */}
+      )}
     </>
   );
 };
