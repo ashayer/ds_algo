@@ -18,7 +18,7 @@ import { trpc } from "../../utils/trpc";
 const StatsCard = () => {
   const { data: session } = useSession();
 
-  const gameStats = trpc.useQuery(["auth.get-user-stats", { id: session?.user?.id as string }]);
+  const gameStats = trpc.useQuery(["auth.get-user-info", { id: session?.user?.id as string }]);
 
   if (gameStats.isLoading) {
     return <div>Loading...</div>;

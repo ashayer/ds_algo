@@ -40,9 +40,8 @@ const Game = () => {
   });
   //   const setGameHasStarted = useUserStore((state) => state.setGameHasStarted);
   const gameStats = trpc.useQuery(["auth.get-user-stats", { id: session?.user?.id as string }]);
-
+  const updateStats = trpc.useMutation(["auth.update-game-stats"]);
   const questionStartTime = new Date();
-
   const onGameStart = () => {
     const randomIndex = Math.floor(Math.random() * gameQuestionList.length);
     setQuestionInfo(gameQuestionList[randomIndex]);
@@ -54,9 +53,15 @@ const Game = () => {
       const totalQuestions = sessionGameStats.numCorrect + sessionGameStats.numWrong;
       if (totalQuestions > 0) {
         const averageResponseTime = Math.floor(sessionGameStats.responseTime / totalQuestions);
+        let firstGame = false;
+        if (gameStats.data.gamesplayed === 0) {
+          firstGame = true;
+        }
         const lifeTimeAverage = Math.floor(
-          (gameStats.data.responsetime + averageResponseTime) / gameStats.data.gamesplayed,
+          (gameStats.data.responsetime + 1 + averageResponseTime) /
+            (firstGame ? 1 : gameStats.data.gamesplayed),
         );
+        console.log(lifeTimeAverage);
         const nextState = produce(gameStats.data, (draftState) => {
           draftState.gamesplayed += 1;
           draftState.points += sessionGameStats.points;
@@ -65,8 +70,9 @@ const Game = () => {
           draftState.responsetime = lifeTimeAverage;
           draftState.higheststreak = higheststreak;
         });
-        // setGameStats(nextState);
-        // updateUserPoints(userId, nextState);
+        if (session) {
+          updateStats.mutate({ id: session.user?.id as string, gameStats: nextState });
+        }
       }
     }
   };
@@ -142,7 +148,7 @@ const Game = () => {
     <>
       {gameStarted && questionDisplay ? (
         <Grid item container sx={{ marginInline: "auto" }}>
-          <UserStatsTable sessionGameStats={sessionGameStats}/>
+          <UserStatsTable sessionGameStats={sessionGameStats} />
           <GameQuestionText questionDisplay={questionDisplay} />
           <GameQuestionContent
             questionDisplay={questionDisplay}
