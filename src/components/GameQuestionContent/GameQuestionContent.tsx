@@ -2,7 +2,6 @@ import { Grid, Box, Typography, Button } from "@mui/material";
 import CodeBlock from "../CodeBlock/CodeBlock";
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { lightfair } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { useState, useEffect } from "react";
 import produce from "immer";
 
@@ -64,7 +63,6 @@ const DragCode = ({
                     >
                       <SyntaxHighlighter
                         language="cpp"
-                        style={lightfair}
                         customStyle={{
                           fontSize: customFontSize(width, height),
                           marginInline: "auto",
@@ -249,7 +247,6 @@ const PseudoCodeContent = ({ questionContent }: { questionContent: string }) => 
     <Grid container item sx={{ justifyContent: "center" }} xs={12}>
       <SyntaxHighlighter
         language="cpp"
-        style={lightfair}
         showLineNumbers
         customStyle={{
           fontSize: customFontSize(width, height),

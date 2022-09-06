@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const UserStatsTable = () => {
+const UserStatsTable = ({ sessionGameStats }: { sessionGameStats: SessionGameStats }) => {
   return (
     <Grid item container xs={10} sx={{ marginInline: "auto" }}>
       <TableContainer>
@@ -44,7 +44,7 @@ const UserStatsTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* <TableRow>
+            <TableRow>
               <TableCell align="center">
                 <Typography variant="h5">{`${sessionGameStats.points}`}</Typography>
               </TableCell>
@@ -60,7 +60,7 @@ const UserStatsTable = () => {
               <TableCell align="center">
                 <Typography variant="h5">{`${sessionGameStats.responseTime}`}</Typography>
               </TableCell>
-            </TableRow> */}
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
