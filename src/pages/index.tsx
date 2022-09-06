@@ -23,7 +23,6 @@ const LandingPage: NextPage = () => {
       container
       direction="column"
       sx={{
-        backgroundColor: "#FFFFFF",
         alignItems: "center",
         marginInline: "auto",
       }}
