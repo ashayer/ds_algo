@@ -1,5 +1,5 @@
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { lightfair } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { lightfair } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 interface CodeBlockProps {
   hoveredLine: number[];
