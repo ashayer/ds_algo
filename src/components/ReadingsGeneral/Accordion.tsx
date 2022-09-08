@@ -16,22 +16,14 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import GeneralAccordionSection from "./GeneralAccordionSection";
 import CodeAccordionSection from "./CodeAccordionSection";
 import QuizModal from "./QuizModal";
-// import axios from "axios";
-// import { useMutation } from "@tanstack/react-query";
-// import useAuthStore from "../../stores/authStore";
 
-// const updateReading = async (id: string, isAlgo: boolean, sectionArray: ReadingSection[]) => {
-//   if (isAlgo) {
-//     const response = await axios.patch(`/api/user/updateAlgoReading/${id}`, {
-//       algoReading: sectionArray,
-//     });
-//     return response.data;
-//   }
-//   const response = await axios.patch(`/api/user/updateStructureReading/${id}`, {
-//     structureReading: sectionArray,
-//   });
-//   return response.data;
-// };
+const updateReading = async (isAlgo: boolean, sectionArray: ReadingSection[]) => {
+  if (isAlgo) {
+    localStorage.setItem("algoReading", JSON.stringify(sectionArray));
+  } else {
+    localStorage.setItem("structureReading", JSON.stringify(sectionArray));
+  }
+};
 
 let userAnswers = [false, false, false, false];
 let checkboxQuestion = [false, false, false, false];
@@ -55,7 +47,6 @@ const AccordionContainer = ({
 }: SortingAlgorithmAccordionProps) => {
   const [open, setOpen] = useState(false);
   const subsectionIndexRef = useRef(0);
-  // const id = useAuthStore((state) => state.id);
 
   const handleOpen = () => {
     userAnswers = [false, false, false, false];
@@ -68,57 +59,46 @@ const AccordionContainer = ({
     if (currentSubSection !== name) setCurrentSubSection(name);
   }
 
-  // const {
-  //   mutate,
-  //   isLoading: mutateLoading,
-  //   isError: mutateError,
-  //   isSuccess: mutateSuccess,
-  // } = useMutation<
-  //   ReadingSection[], // return type
-  //   Error,
-  //   ReadingSection[] // params type
-  // >(() => updateReading(id, isAlgo, sectionArray));
+  const completedAccordion = async (index: number) => {
+    sectionArray[sectionNum].subsections[index].completed = true;
+    const newSectionArrays = sectionArray.slice();
+    setSectionArray(newSectionArrays);
+    setCurrentSubSection(sectionArray[sectionNum].subsections[index].name);
+    if (index === sectionArray[sectionNum].subsections.length - 1) {
+      sectionArray[sectionNum].completed = true;
+      const temp = sectionArray.slice();
+      setSectionArray(temp);
+      updateReading(isAlgo, sectionArray);
+    }
+    handleAccordClick(sectionArray[sectionNum].subsections[index].name);
+    handleClose();
+    updateReading(isAlgo, newSectionArrays);
+  };
 
-  // const completedAccordion = async (index: number) => {
-  //   sectionArray[sectionNum].subsections[index].completed = true;
-  //   const newSectionArrays = sectionArray.slice();
-  //   setSectionArray(newSectionArrays);
-  //   setCurrentSubSection(sectionArray[sectionNum].subsections[index].name);
-  //   if (index === sectionArray[sectionNum].subsections.length - 1) {
-  //     sectionArray[sectionNum].completed = true;
-  //     const temp = sectionArray.slice();
-  //     setSectionArray(temp);
-  //     mutate(temp);
-  //   }
-  //   handleAccordClick(sectionArray[sectionNum].subsections[index].name);
-  //   handleClose();
-  //   mutate(newSectionArrays);
-  // };
+  const checkAnswers = () => {
+    let totalCorrect = 0;
+    userAnswers.map((answer) => {
+      if (answer) {
+        totalCorrect += 1;
+      }
+      return totalCorrect;
+    });
+    if (totalCorrect / 4 !== 1) {
+      alert("Need 100% correct");
+    } else {
+      completedAccordion(subsectionIndexRef.current);
+    }
+    completedAccordion(subsectionIndexRef.current);
+  };
 
-  // const checkAnswers = () => {
-  //   // let totalCorrect = 0;
-  //   // userAnswers.map((answer) => {
-  //   //   if (answer) {
-  //   //     totalCorrect += 1;
-  //   //   }
-  //   //   return totalCorrect;
-  //   // });
-  //   // if (totalCorrect / 4 !== 1) {
-  //   //   alert("Need 100% correct");
-  //   // } else {
-  //   //   completedAccordion(subsectionIndexRef.current);
-  //   // }
-  //   completedAccordion(subsectionIndexRef.current);
-  // };
-
-  // const handleCollapse = (index: number, subsection: any) => {
-  //   if (index === 0 || sectionArray[sectionNum].subsections[index - 1].completed) {
-  //     handleAccordClick(subsection.name);
-  //   }
-  // };
+  const handleCollapse = (index: number, subsection: any) => {
+    if (index === 0 || sectionArray[sectionNum].subsections[index - 1].completed) {
+      handleAccordClick(subsection.name);
+    }
+  };
   return (
     <>
-      {/* <Modal open={open}>
+      <Modal open={open}>
         <Box
           sx={{
             position: "absolute",
@@ -133,6 +113,7 @@ const AccordionContainer = ({
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            color: "black",
           }}
         >
           <Button
@@ -150,7 +131,7 @@ const AccordionContainer = ({
           >
             X
           </Button>
-          <Typography variant="h3">
+          <Typography variant="h3" sx={{}}>
             {subsectionIndexRef.current
               ? `${sectionArray[sectionNum].sectionName} Code Quiz`
               : `${sectionArray[sectionNum].sectionName} General Quiz`}
@@ -168,9 +149,9 @@ const AccordionContainer = ({
             Submit
           </Button>
         </Box>
-      </Modal> */}
+      </Modal>
 
-      {/* <Accordion
+      <Accordion
         defaultExpanded
         sx={{
           backgroundColor: `${sectionArray[sectionNum].completed ? "#4db866" : "#ff8178"}`,
@@ -232,7 +213,7 @@ const AccordionContainer = ({
             </Accordion>
           ))}
         </AccordionDetails>
-      </Accordion> */}
+      </Accordion>
     </>
   );
 };

@@ -47,6 +47,7 @@ model User {
   wronganswer   Int       @default(0)
   responsetime  Int       @default(0)
   higheststreak Int       @default(0)
+
   accounts      Account[]
   sessions      Session[]
 }

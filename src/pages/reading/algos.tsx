@@ -1,28 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Button, Grid } from "@mui/material";
 import SortingAlgorithmAccordion from "../../components/ReadingsGeneral/Accordion";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-// import axios from "axios";
-// import { useQuery } from "@tanstack/react-query";
-// import useAuthStore from "../../stores/authStore";
-
-// const getUserAlgoReading = async (id: string) => {
-//   const response = await axios.get(`/api/user/getAlgoReading/${id}`);
-//   return response.data;
-// };
+import AlgoSectionArray from "../../utils/algoSectionReading";
+import StructureSectionArray from "../../utils/structureSectionReading";
 import type { NextPage } from "next";
 
 const AlgoReading: NextPage = () => {
   const [sectionNum, setSectionNum] = useState<number>(0);
-  const [sectionArray, setSectionArray] = useState<any>([]);
+  const [sectionArray, setSectionArray] = useState<any>(
+    JSON.parse(localStorage.getItem("algoReading") || JSON.stringify(AlgoSectionArray)),
+  );
   const [currentSubSection, setCurrentSubSection] = useState("");
-
-  // const { data, isLoading, isSuccess, isError } = useQuery<ReadingSection[], Error>(
-  //   ["get-algo-reading"],
-  //   () => getUserAlgoReading(id),
-  //   { onSuccess: setSectionArray },
-  // );
 
   const nextSection = () => {
     setCurrentSubSection("");
@@ -34,10 +24,21 @@ const AlgoReading: NextPage = () => {
     if (sectionNum > 0) setSectionNum(sectionNum - 1);
   };
 
+  useEffect(() => {
+    const isAlgoReading = localStorage.getItem("algoReading");
+    const isStructureReading = localStorage.getItem("structureReading");
+
+    if (!isAlgoReading) {
+      localStorage.setItem("algoReading", JSON.stringify(AlgoSectionArray));
+    }
+    if (!isStructureReading) {
+      localStorage.setItem("structureReading", JSON.stringify(StructureSectionArray));
+    }
+  }, []);
+
   return (
     <Box maxWidth="xl" sx={{ marginInline: "auto", mt: 2 }}>
-      <>asdasdasda</>
-      {true && (
+      {sectionArray.length > 0 && (
         <>
           <SortingAlgorithmAccordion
             sectionNum={sectionNum}
