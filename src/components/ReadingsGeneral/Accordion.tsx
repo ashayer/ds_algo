@@ -98,122 +98,132 @@ const AccordionContainer = ({
   };
   return (
     <>
-      <Modal open={open}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            overflow: "auto",
-            backgroundColor: "white",
-            height: "90vh",
-            width: "75vw",
-            outline: "none",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            color: "black",
-          }}
-        >
-          <Button
-            onClick={() => handleClose()}
-            sx={{
-              float: "right",
-              borderRadius: "0",
-              m: 0.5,
-              "&:hover": {
-                backgroundColor: "red",
-              },
-              alignSelf: "end",
-            }}
-            variant="contained"
-          >
-            X
-          </Button>
-          <Typography variant="h3" sx={{}}>
-            {subsectionIndexRef.current
-              ? `${sectionArray[sectionNum].sectionName} Code Quiz`
-              : `${sectionArray[sectionNum].sectionName} General Quiz`}
-          </Typography>
-
-          <QuizModal
-            userAnswers={userAnswers}
-            checkboxQuestion={checkboxQuestion}
-            subsectionIndex={subsectionIndexRef.current}
-            sectionNum={sectionNum}
-            isAlgo={isAlgo}
-          />
-
-          <Button onClick={() => checkAnswers()} variant="contained">
-            Submit
-          </Button>
-        </Box>
-      </Modal>
-
-      <Accordion
-        defaultExpanded
-        sx={{
-          backgroundColor: `${sectionArray[sectionNum].completed ? "#4db866" : "#ff8178"}`,
-        }}
-      >
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="h3">{sectionArray[sectionNum].sectionName}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          {sectionArray[sectionNum].subsections.map((subsection, index) => (
-            <Accordion
-              key={subsection.name}
-              expanded={currentSubSection === subsection.name}
-              disabled={
-                index === 0 ? false : !sectionArray[sectionNum].subsections[index - 1].completed
-              }
+      {sectionArray.length > 0 && (
+        <>
+          <Modal open={open}>
+            <Box
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                overflow: "auto",
+                backgroundColor: "white",
+                height: "90vh",
+                width: "75vw",
+                outline: "none",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                color: "black",
+              }}
             >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                onClick={() => handleCollapse(index, subsection)}
-                sx={{ borderBottom: "1px solid black" }}
+              <Button
+                onClick={() => handleClose()}
+                sx={{
+                  float: "right",
+                  borderRadius: "0",
+                  m: 0.5,
+                  "&:hover": {
+                    backgroundColor: "red",
+                  },
+                  alignSelf: "end",
+                }}
+                variant="contained"
               >
-                <Grid container sx={{ justifyContent: "space-between", alignItems: "center" }}>
-                  <Typography variant="h5">{subsection.name}</Typography>
-                  {subsection.completed ? (
-                    <CheckBoxIcon color="success" fontSize="large" />
-                  ) : (
-                    <CheckBoxOutlineBlankIcon fontSize="large" />
-                  )}
-                </Grid>
-              </AccordionSummary>
-              <AccordionDetails>
-                {index === 0 ? (
-                  <GeneralAccordionSection sectionNum={sectionNum} isAlgo={isAlgo} />
-                ) : index === 1 ? (
-                  <CodeAccordionSection sectionNum={sectionNum} isAlgo={isAlgo} />
-                ) : null}
-              </AccordionDetails>
-              {!subsection.completed ? (
-                <Button
-                  onClick={() => {
-                    subsectionIndexRef.current = index;
-                    handleOpen();
-                  }}
-                  variant="contained"
-                >
-                  Take Quiz
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => handleAccordClick(subsection.name)}
-                  variant="contained"
-                  color="error"
-                  sx={{ borderRadius: "0px", float: "right" }}
-                >
-                  <CloseIcon />
-                </Button>
-              )}
-            </Accordion>
-          ))}
-        </AccordionDetails>
-      </Accordion>
+                X
+              </Button>
+              <Typography variant="h3" sx={{}}>
+                {subsectionIndexRef.current
+                  ? `${sectionArray[sectionNum].sectionName} Code Quiz`
+                  : `${sectionArray[sectionNum].sectionName} General Quiz`}
+              </Typography>
+
+              <QuizModal
+                userAnswers={userAnswers}
+                checkboxQuestion={checkboxQuestion}
+                subsectionIndex={subsectionIndexRef.current}
+                sectionNum={sectionNum}
+                isAlgo={isAlgo}
+              />
+
+              <Button onClick={() => checkAnswers()} variant="contained">
+                Submit
+              </Button>
+            </Box>
+          </Modal>
+
+          <Accordion
+            defaultExpanded
+            sx={{
+              backgroundColor: `${sectionArray[sectionNum].completed ? "#4db866" : "#ff8178"}`,
+            }}
+          >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography variant="h3">{sectionArray[sectionNum].sectionName}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {sectionArray[sectionNum].subsections &&
+                sectionArray[sectionNum].subsections.map((subsection, index) => (
+                  <Accordion
+                    key={subsection.name}
+                    expanded={currentSubSection === subsection.name}
+                    disabled={
+                      index === 0
+                        ? false
+                        : !sectionArray[sectionNum].subsections[index - 1].completed
+                    }
+                  >
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      onClick={() => handleCollapse(index, subsection)}
+                      sx={{ borderBottom: "1px solid black" }}
+                    >
+                      <Grid
+                        container
+                        sx={{ justifyContent: "space-between", alignItems: "center" }}
+                      >
+                        <Typography variant="h5">{subsection.name}</Typography>
+                        {subsection.completed ? (
+                          <CheckBoxIcon color="success" fontSize="large" />
+                        ) : (
+                          <CheckBoxOutlineBlankIcon fontSize="large" />
+                        )}
+                      </Grid>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      {index === 0 ? (
+                        <GeneralAccordionSection sectionNum={sectionNum} isAlgo={isAlgo} />
+                      ) : index === 1 ? (
+                        <CodeAccordionSection sectionNum={sectionNum} isAlgo={isAlgo} />
+                      ) : null}
+                    </AccordionDetails>
+                    {!subsection.completed ? (
+                      <Button
+                        onClick={() => {
+                          subsectionIndexRef.current = index;
+                          handleOpen();
+                        }}
+                        variant="contained"
+                      >
+                        Take Quiz
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => handleAccordClick(subsection.name)}
+                        variant="contained"
+                        color="error"
+                        sx={{ borderRadius: "0px", float: "right" }}
+                      >
+                        <CloseIcon />
+                      </Button>
+                    )}
+                  </Accordion>
+                ))}
+            </AccordionDetails>
+          </Accordion>
+        </>
+      )}
     </>
   );
 };
