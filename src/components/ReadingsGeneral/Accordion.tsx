@@ -88,7 +88,6 @@ const AccordionContainer = ({
     } else {
       completedAccordion(subsectionIndexRef.current);
     }
-    completedAccordion(subsectionIndexRef.current);
   };
 
   const handleCollapse = (index: number, subsection: any) => {
