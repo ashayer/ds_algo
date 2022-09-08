@@ -7,11 +7,23 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import DataStructureAccordion from "../../components/ReadingsGeneral/Accordion";
 
+const localStorageHelper = () => {
+  if (typeof window !== "undefined") {
+    const isAlgoReading = localStorage.getItem("algoReading");
+    const isStructureReading = localStorage.getItem("structureReading");
+
+    if (!isAlgoReading) {
+      localStorage.setItem("algoReading", JSON.stringify(AlgoSectionArray));
+    }
+    if (!isStructureReading) {
+      localStorage.setItem("structureReading", JSON.stringify(StructureSectionArray));
+    }
+  }
+};
+
 const StructureReading: NextPage = () => {
   const [sectionNum, setSectionNum] = useState<number>(0);
-  const [sectionArray, setSectionArray] = useState<any>(
-    JSON.parse(localStorage.getItem("structureReading") || JSON.stringify(StructureSectionArray)),
-  );
+  const [sectionArray, setSectionArray] = useState<any>(JSON.stringify(StructureSectionArray));
   const [currentSubSection, setCurrentSubSection] = useState("");
 
   const nextSection = () => {
@@ -25,14 +37,9 @@ const StructureReading: NextPage = () => {
   };
 
   useEffect(() => {
-    const isAlgoReading = localStorage.getItem("algoReading");
-    const isStructureReading = localStorage.getItem("structureReading");
-
-    if (!isAlgoReading) {
-      localStorage.setItem("algoReading", JSON.stringify(AlgoSectionArray));
-    }
-    if (!isStructureReading) {
-      localStorage.setItem("structureReading", JSON.stringify(StructureSectionArray));
+    localStorageHelper();
+    if (typeof window !== "undefined") {
+      setSectionArray(JSON.parse(localStorage.getItem("structureReading") as string));
     }
   }, []);
 

@@ -7,11 +7,23 @@ import AlgoSectionArray from "../../utils/algoSectionReading";
 import StructureSectionArray from "../../utils/structureSectionReading";
 import type { NextPage } from "next";
 
+const localStorageHelper = () => {
+  if (typeof window !== "undefined") {
+    const isAlgoReading = localStorage.getItem("algoReading");
+    const isStructureReading = localStorage.getItem("structureReading");
+
+    if (!isAlgoReading) {
+      localStorage.setItem("algoReading", JSON.stringify(AlgoSectionArray));
+    }
+    if (!isStructureReading) {
+      localStorage.setItem("structureReading", JSON.stringify(StructureSectionArray));
+    }
+  }
+};
+
 const AlgoReading: NextPage = () => {
   const [sectionNum, setSectionNum] = useState<number>(0);
-  const [sectionArray, setSectionArray] = useState<any>(
-    JSON.parse(localStorage.getItem("algoReading") || JSON.stringify(AlgoSectionArray)),
-  );
+  const [sectionArray, setSectionArray] = useState<any>(JSON.stringify(AlgoSectionArray));
   const [currentSubSection, setCurrentSubSection] = useState("");
 
   const nextSection = () => {
@@ -25,14 +37,9 @@ const AlgoReading: NextPage = () => {
   };
 
   useEffect(() => {
-    const isAlgoReading = localStorage.getItem("algoReading");
-    const isStructureReading = localStorage.getItem("structureReading");
-
-    if (!isAlgoReading) {
-      localStorage.setItem("algoReading", JSON.stringify(AlgoSectionArray));
-    }
-    if (!isStructureReading) {
-      localStorage.setItem("structureReading", JSON.stringify(StructureSectionArray));
+    localStorageHelper();
+    if (typeof window !== "undefined") {
+      setSectionArray(JSON.parse(localStorage.getItem("algoReading") as string));
     }
   }, []);
 
