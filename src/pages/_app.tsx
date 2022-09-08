@@ -1,5 +1,5 @@
 // src/pages/_app.tsx
-import { useState, useMemo, createContext } from "react";
+import { useState, useMemo, createContext, useEffect } from "react";
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
 import { loggerLink } from "@trpc/client/links/loggerLink";
 import { withTRPC } from "@trpc/next";

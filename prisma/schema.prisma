@@ -51,18 +51,6 @@ model User {
   sessions      Session[]
 }
 
-// model UserGameStats {
-//   id            String @id @default(auto()) @map("_id") @db.ObjectId
-//   gamesplayed   Int    @default(0)
-//   points        Int    @default(0)
-//   rightanswer   Int    @default(0)
-//   wronganswer   Int    @default(0)
-//   responsetime  Int    @default(0)
-//   higheststreak Int    @default(0)
-//   user          User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-//   userId        String
-// }
-
 model VerificationToken {
   identifier String   @id @default(auto()) @map("_id") @db.ObjectId
   token      String   @unique

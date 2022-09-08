@@ -118,8 +118,8 @@ function mergeChooseCode() {
       }
     }
 
-    const rightAnswer = answersObjectArrayForMergeSort[randomLineNumber].right.slice(2);
-    const wrongAnswers = shuffle(answersObjectArrayForMergeSort[randomLineNumber].wrong);
+    const rightAnswer = answersObjectArrayForMerge[randomLineNumber].right.slice(2);
+    const wrongAnswers = shuffle(answersObjectArrayForMerge[randomLineNumber].wrong);
 
     const answerChoices = [{ isCorrect: true, answerContent: rightAnswer }];
     for (const wrongChoice of wrongAnswers) {

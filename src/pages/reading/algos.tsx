@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Box, Button, Grid } from "@mui/material";
-// import SortingAlgorithmAccordion from "../../components/ReadingsGeneral/Accordion";
-// import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-// import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import SortingAlgorithmAccordion from "../../components/ReadingsGeneral/Accordion";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 // import axios from "axios";
 // import { useQuery } from "@tanstack/react-query";
 // import useAuthStore from "../../stores/authStore";
@@ -15,7 +15,6 @@ import type { NextPage } from "next";
 
 const AlgoReading: NextPage = () => {
   const [sectionNum, setSectionNum] = useState<number>(0);
-  // const id = useAuthStore((state) => state.id);
   const [sectionArray, setSectionArray] = useState<any>([]);
   const [currentSubSection, setCurrentSubSection] = useState("");
 
@@ -38,7 +37,7 @@ const AlgoReading: NextPage = () => {
   return (
     <Box maxWidth="xl" sx={{ marginInline: "auto", mt: 2 }}>
       <>asdasdasda</>
-      {/* {isSuccess && !isLoading && sectionArray.length > 0 && (
+      {true && (
         <>
           <SortingAlgorithmAccordion
             sectionNum={sectionNum}
@@ -72,7 +71,7 @@ const AlgoReading: NextPage = () => {
               onClick={nextSection}
               variant="contained"
               disabled={
-                sectionNum === sectionArray.length - 1 || !sectionArray[sectionNum].completed
+                sectionNum === sectionArray.length - 1 || !sectionArray[sectionNum]?.completed
               }
               sx={{
                 visibility: `${sectionNum === sectionArray.length - 1 ? "hidden" : "visible"}`,
@@ -85,7 +84,7 @@ const AlgoReading: NextPage = () => {
             </Button>
           </Grid>
         </>
-      )} */}
+      )}
     </Box>
   );
 };

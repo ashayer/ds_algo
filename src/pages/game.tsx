@@ -10,25 +10,10 @@ import produce from "immer";
 import { useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 
-// import useUserStore from "../../stores/userStore";
-// import useAuthStore from "../../stores/authStore";
-// import axios from "axios";
-
-// const updateUserPoints = async (id: string, gameStats: GameStats) => {
-//   if (gameStats) {
-//     try {
-//       const response = await axios.patch(`/api/user/updateGameStats/${id}`, { gameStats });
-//       return response.data;
-//     } catch (error) {
-//       alert("Something went wrong");
-//     }
-//   }
-// };
-
 const Game = () => {
   const { data: session } = useSession();
   let higheststreak = 0;
-  const [gameStarted, setGameStarted] = useState(true);
+  const [gameStarted, setGameStarted] = useState(false);
   const [questionInfo, setQuestionInfo] = useState<GameQuestionInfo>(gameQuestionList[0]);
   const [questionDisplay, setQuestionDisplay] = useState<GameDisplayInfo>();
   const [sessionGameStats, setSessionGameStats] = useState<SessionGameStats>({
@@ -40,7 +25,11 @@ const Game = () => {
   });
   //   const setGameHasStarted = useUserStore((state) => state.setGameHasStarted);
   const gameStats = trpc.useQuery(["auth.get-user-stats", { id: session?.user?.id as string }]);
-  const updateStats = trpc.useMutation(["auth.update-game-stats"]);
+  const updateStats = trpc.useMutation(["auth.update-game-stats"], {
+    onMutate: () => {
+      setGameStarted(false);
+    },
+  });
   const questionStartTime = new Date();
   const onGameStart = () => {
     const randomIndex = Math.floor(Math.random() * gameQuestionList.length);
@@ -85,16 +74,18 @@ const Game = () => {
 
   const onGameEnd = () => {
     calculateUpdate();
-    const nextState = produce(sessionGameStats, (draftState) => {
-      draftState.numCorrect = 0;
-      draftState.streak = 0;
-      draftState.points = 0;
-      draftState.responseTime = 0;
-      draftState.numWrong = 0;
-    });
-    higheststreak = 0;
-    setSessionGameStats(nextState);
-    setGameStarted(false);
+    if (updateStats.isSuccess) {
+      const nextState = produce(sessionGameStats, (draftState) => {
+        draftState.numCorrect = 0;
+        draftState.streak = 0;
+        draftState.points = 0;
+        draftState.responseTime = 0;
+        draftState.numWrong = 0;
+      });
+      higheststreak = 0;
+      setSessionGameStats(nextState);
+      setGameStarted(false);
+    }
   };
 
   const generateNextQuestion = useCallback(() => {
@@ -122,8 +113,8 @@ const Game = () => {
       draftState.points += updatePointsBy;
       draftState.responseTime += questionEndTime.getTime() - questionStartTime.getTime();
     });
-    isHighestStreak();
     setSessionGameStats(nextState);
+    isHighestStreak();
     generateNextQuestion();
   };
 

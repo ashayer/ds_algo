@@ -14,6 +14,7 @@ const Navbar = () => {
   const { data: session } = useSession();
   const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
+
   return (
     <>
       {session?.user && (
