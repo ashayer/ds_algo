@@ -11,9 +11,10 @@ const MiddleLandingPage = () => {
         textAlign: "center",
         justifyContent: "center",
         alignItems: "center",
+        p: 10,
       }}
     >
-      <Grid item sx={{ p: 10 }}>
+      <Grid item>
         <Typography
           variant="h1"
           sx={{
@@ -23,12 +24,15 @@ const MiddleLandingPage = () => {
         >
           LEARN AS YOU NEED
         </Typography>
+      </Grid>
+      <Grid item>
         <Typography
           variant="h5"
           sx={{
             fontWeight: "bold",
             color: "#B3B6B7",
           }}
+          maxWidth="sm"
         >
           Choose from a variety of learning materials and methods that best suit your needs and
           preferences.
