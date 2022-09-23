@@ -12,13 +12,13 @@ const BottomLandingPage = () => {
       item
       container
       direction="column"
-      sx={{ backgroundColor: "#121212", color: "white", p: 10, alignItems: "center" }}
+      sx={{ backgroundColor: "#121212", color: "white", alignItems: "center" }}
     >
-      <Grid item container sx={{ py: 10 }}>
-        <Grid item xs={6}>
+      <Grid item container xs={12} sx={{ py: 10 }}>
+        <Grid item xs={12} lg={6} sx={{ px: 5 }}>
           <Image src={ReadingsGif} style={{ borderRadius: "20px" }} alt="readings gif" />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} lg={6} sx={{ p: 5 }}>
           <Typography variant="h2" fontWeight="900" sx={{ color: "#FE6812" }}>
             READINGS
           </Typography>
@@ -26,20 +26,20 @@ const BottomLandingPage = () => {
             Learn about fundamental sorting algorithms and data structures through sequential
             reading sections and summary quizzes
           </Typography>
-          <Typography variant="h4" fontWeight="bold" textAlign="right">
+          <Typography variant="h4" fontWeight="bold" textAlign="right" sx={{ pt: 5 }}>
             Sorting Algorithms Covered
           </Typography>
           <Typography variant="h6" textAlign="right">
             Insertion - Selection - Merge - Quick
           </Typography>
-          <Typography variant="h4" fontWeight="bold">
+          <Typography variant="h4" fontWeight="bold" sx={{ pt: 5 }}>
             Data Structures Covered
           </Typography>
           <Typography variant="h6">Queue - Stack - Linked Lists - Binary Tree</Typography>
         </Grid>
       </Grid>
-      <Grid item container sx={{ py: 10, pr: 10 }}>
-        <Grid item xs={6}>
+      <Grid item container xs={12} sx={{ py: 5 }}>
+        <Grid item xs={12} lg={6} order={{ xs: 2, lg: 1 }} sx={{ p: 5 }}>
           <Typography variant="h2" fontWeight="900" sx={{ color: "#FE6812" }}>
             QUIZ GAME
           </Typography>
@@ -52,15 +52,15 @@ const BottomLandingPage = () => {
             drop. Each question is randomly generated and range in difficulty.
           </Typography>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} lg={6} order={{ xs: 1 }}>
           <Image src={QuizGif} style={{ borderRadius: "20px" }} alt="quiz gif" />
         </Grid>
       </Grid>
-      <Grid item container sx={{ py: 10 }}>
-        <Grid item xs={6}>
+      <Grid item container xs={12} sx={{ py: 5 }}>
+        <Grid item xs={12} lg={6} sx={{ px: 5 }}>
           <Image src={SandboxGif} style={{ borderRadius: "20px" }} alt="sandbox gif" />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} lg={6} sx={{ p: 5 }}>
           <Typography variant="h2" fontWeight="900" sx={{ color: "#FE6812" }}>
             SANDBOX
           </Typography>
