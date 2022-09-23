@@ -15,7 +15,7 @@ import { CssBaseline } from "@mui/material";
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
-  const [mode, setMode] = useState<"light" | "dark">("light");
+  const [mode, setMode] = useState<"light" | "dark">("dark");
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {

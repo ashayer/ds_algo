@@ -12,6 +12,7 @@ const TopLandingPage = () => {
       sx={{
         backgroundColor: "#FE6812",
         pt: 10,
+        height: "100vh",
       }}
       textAlign="center"
     >
@@ -22,7 +23,7 @@ const TopLandingPage = () => {
         sx={{ py: 10, alignItems: "center" }}
         spacing={3}
         xs={12}
-        md={6}
+        lg={6}
       >
         <Grid item>
           <Typography
@@ -52,7 +53,7 @@ const TopLandingPage = () => {
         <Grid item>
           <Button
             variant="contained"
-            sx={{ backgroundColor: "#121212", borderRadius: "10px", p: 2 }}
+            sx={{ borderRadius: "10px", p: 2 }}
             endIcon={<ArrowForwardIcon />}
             onClick={() => signIn("google", { callbackUrl: "/home" })}
           >
@@ -60,7 +61,7 @@ const TopLandingPage = () => {
           </Button>
         </Grid>
       </Grid>
-      <Grid item xs={12} md={6} sx={{ pb: 10 }}>
+      <Grid item xs={12} lg={6} sx={{ pb: 10 }}>
         <Image src={educate} alt="Educator image" />
       </Grid>
     </Grid>

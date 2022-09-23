@@ -52,7 +52,7 @@ const BottomLandingPage = () => {
             drop. Each question is randomly generated and range in difficulty.
           </Typography>
         </Grid>
-        <Grid item xs={12} lg={6} order={{ xs: 1 }}>
+        <Grid item xs={12} lg={6} order={{ xs: 1 }} sx={{ px: 5 }}>
           <Image src={QuizGif} style={{ borderRadius: "20px" }} alt="quiz gif" />
         </Grid>
       </Grid>
@@ -73,7 +73,7 @@ const BottomLandingPage = () => {
       <Grid item>
         <Button
           variant="contained"
-          sx={{ backgroundColor: "#121212", borderRadius: "10px", p: 2 }}
+          sx={{ borderRadius: "10px", p: 2 }}
           endIcon={<ArrowForwardIcon />}
           onClick={() => signIn("google", { callbackUrl: "/home" })}
         >
