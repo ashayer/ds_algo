@@ -3,7 +3,6 @@ import Image from "next/image";
 import ReadingsGif from "../../assets/readings.gif";
 import QuizGif from "../../assets/quiz.gif";
 import SandboxGif from "../../assets/sandbox.gif";
-
 const BottomLandingPage = () => {
   return (
     <Grid
@@ -12,20 +11,20 @@ const BottomLandingPage = () => {
       direction="column"
       sx={{ backgroundColor: "#121212", color: "white", p: 10 }}
     >
-      <Grid item container sx={{ py: 10 }}>
-        <Grid item xs={6}>
-          <Image src={ReadingsGif} style={{ borderRadius: "20px" }} alt="readings gif" />
+        <Grid item container sx={{ py: 10 }}>
+          <Grid item xs={6}>
+            <Image src={ReadingsGif} style={{ borderRadius: "20px" }} alt="readings gif" />
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="h2" fontWeight="900" sx={{}}>
+              READINGS
+            </Typography>
+            <Typography variant="h6" fontWeight="bold">
+              Learn about fundamental sorting algorithms and data structures through sequential
+              reading sections and summary quizzes
+            </Typography>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h2" fontWeight="900" sx={{}}>
-            READINGS
-          </Typography>
-          <Typography variant="h6" fontWeight="bold">
-            Learn about fundamental sorting algorithms and data structures through sequential
-            reading sections and summary quizzes
-          </Typography>
-        </Grid>
-      </Grid>
       <Grid item container sx={{ py: 10 }}>
         <Grid item xs={6}>
           <Typography variant="h2" fontWeight="900">

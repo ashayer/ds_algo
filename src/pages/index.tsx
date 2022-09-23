@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import TopLandingPage from "../components/LandingPage/TopLandingPage";
 import MiddleLandingPage from "../components/LandingPage/MiddleLandingPage";
 import BottomLandingPage from "../components/LandingPage/BottomLandingPage";
+import Footer from "../components/Footer/Footer";
 const LandingPage: NextPage = () => {
   const { data: session } = useSession();
   const router = useRouter();
@@ -21,6 +22,7 @@ const LandingPage: NextPage = () => {
       <TopLandingPage />
       <MiddleLandingPage />
       <BottomLandingPage />
+      <Footer />
     </Grid>
   );
 };
