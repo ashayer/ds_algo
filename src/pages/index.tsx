@@ -1,10 +1,6 @@
-import { useState, useEffect } from "react";
-import { Grid, Typography, Button, Dialog } from "@mui/material";
+import { Grid } from "@mui/material";
 import { NextPage } from "next";
-// import { useNavigate } from "react-router-dom";
-// import Signup from "../components/Signup/Signup";
-// import useStore from "../../stores/authStore";
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 import TopLandingPage from "../components/LandingPage/TopLandingPage";

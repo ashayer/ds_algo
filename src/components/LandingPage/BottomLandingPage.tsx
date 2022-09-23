@@ -1,4 +1,4 @@
-import { Grid, Typography, Button, Dialog } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 const BottomLandingPage = () => {
   return (
@@ -31,7 +31,7 @@ const BottomLandingPage = () => {
           SANDBOX
         </Typography>
         <Typography variant="h6" fontWeight="bold">
-          EXPLORE SORTING ALGORTIHMS THROUGH VISUALIZATIONS AND STEP-THROUGH CODE HIGHLIGHTING FOR A
+          EXPLORE SORTING ALGORITHMS THROUGH VISUALIZATIONS AND STEP-THROUGH CODE HIGHLIGHTING FOR A
           DEEPER UNDERSTANDING
         </Typography>
       </Grid>

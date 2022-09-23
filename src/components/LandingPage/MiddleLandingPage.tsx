@@ -30,7 +30,7 @@ const MiddleLandingPage = () => {
           variant="h5"
           sx={{
             fontWeight: "bold",
-            color: "#B3B6B7",
+            color: "#DFDFDF",
           }}
           maxWidth="sm"
         >
