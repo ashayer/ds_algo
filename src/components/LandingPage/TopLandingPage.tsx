@@ -2,6 +2,7 @@ import { Grid, Typography, Button, Dialog } from "@mui/material";
 import Image from "next/image";
 import educate from "../../assets/educate.svg";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { signIn } from "next-auth/react";
 
 const TopLandingPage = () => {
   return (
@@ -46,11 +47,12 @@ const TopLandingPage = () => {
             Supplement your learning
           </Typography>
         </Grid>
-        <Grid item sx={{ justifySelf: "center" }}>
+        <Grid item>
           <Button
             variant="contained"
             sx={{ backgroundColor: "#121212", borderRadius: "10px", p: 2 }}
             endIcon={<ArrowForwardIcon />}
+            onClick={() => signIn("google", { callbackUrl: "/home" })}
           >
             <Typography variant="h6">Start Learning</Typography>
           </Button>

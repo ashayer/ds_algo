@@ -1,5 +1,6 @@
 import { Grid, Typography } from "@mui/material";
-
+import Image from "next/image";
+import ReadingsGif from "../../assets/readings.gif";
 const BottomLandingPage = () => {
   return (
     <Grid
@@ -8,45 +9,45 @@ const BottomLandingPage = () => {
       direction="column"
       sx={{ backgroundColor: "#121212", color: "white", p: 10 }}
     >
-      <Grid item container sx={{ textAlign: "right" }}>
-        <Grid item sx={{ border: "1px solid red" }} xs={6}>
-          picture or gif
+      <Grid item container>
+        <Grid item xs={6}>
+          <Image src={ReadingsGif} alt="readings gif" />
         </Grid>
-        <Grid item sx={{ border: "1px solid red" }} xs={6}>
-          <Typography variant="h2" fontWeight="900">
+        <Grid item xs={6}>
+          <Typography variant="h2" fontWeight="900" sx={{}}>
             READINGS
           </Typography>
           <Typography variant="h6" fontWeight="bold">
-            Learn about fundamental sorting algorithms and data structures with with sequential
+            Learn about fundamental sorting algorithms and data structures through sequential
             reading sections and summary quizzes
           </Typography>
         </Grid>
       </Grid>
       <Grid item container>
-        <Grid item sx={{ border: "1px solid red" }} xs={6}>
+        <Grid item xs={6}>
           <Typography variant="h2" fontWeight="900">
-            READINGS
+            QUIZ GAME
           </Typography>
           <Typography variant="h6" fontWeight="bold">
-            Learn about fundamental sorting algorithms and data structures with with sequential
-            reading sections and summary quizzes
+            Keep your skills sharp with a quiz game with 50+ randomly generated questions covering
+            all reading topics.
           </Typography>
         </Grid>
-        <Grid item sx={{ border: "1px solid red" }} xs={6}>
+        <Grid item xs={6}>
           picture or gif
         </Grid>
       </Grid>
-      <Grid item container sx={{ textAlign: "right" }}>
-        <Grid item sx={{ border: "1px solid red" }} xs={6}>
+      <Grid item container>
+        <Grid item xs={6}>
           picture or gif
         </Grid>
-        <Grid item sx={{ border: "1px solid red" }} xs={6}>
+        <Grid item xs={6}>
           <Typography variant="h2" fontWeight="900">
-            READINGS
+            SANDBOX
           </Typography>
           <Typography variant="h6" fontWeight="bold">
-            Learn about fundamental sorting algorithms and data structures with with sequential
-            reading sections and summary quizzes
+            EXPLORE SORTING ALGORITHMS THROUGH VISUALIZATIONS AND STEP-THROUGH CODE HIGHLIGHTING FOR
+            A DEEPER UNDERSTANDING
           </Typography>
         </Grid>
       </Grid>
