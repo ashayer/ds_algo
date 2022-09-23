@@ -42,7 +42,6 @@ const SortOptions = ({
       sx={{
         justifyContent: "space-around",
         alignItems: "center",
-        backgroundColor: "white",
         mt: 1,
         p: 1,
       }}

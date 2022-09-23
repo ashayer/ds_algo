@@ -118,7 +118,7 @@ const AlgoSandbox: NextPage = () => {
   };
 
   return (
-    <>
+    <Grid item container sx={{ marginInline: "auto" }}>
       <SortOptions
         algorithm={algorithm}
         handleAlgoChange={handleAlgoChange}
@@ -167,7 +167,7 @@ const AlgoSandbox: NextPage = () => {
           </Grid>
         )}
       </Grid>
-    </>
+    </Grid>
   );
 };
 

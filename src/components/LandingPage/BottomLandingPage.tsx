@@ -1,6 +1,9 @@
 import { Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import ReadingsGif from "../../assets/readings.gif";
+import QuizGif from "../../assets/quiz.gif";
+import SandboxGif from "../../assets/sandbox.gif";
+
 const BottomLandingPage = () => {
   return (
     <Grid
@@ -9,9 +12,9 @@ const BottomLandingPage = () => {
       direction="column"
       sx={{ backgroundColor: "#121212", color: "white", p: 10 }}
     >
-      <Grid item container>
+      <Grid item container sx={{ py: 10 }}>
         <Grid item xs={6}>
-          <Image src={ReadingsGif} alt="readings gif" />
+          <Image src={ReadingsGif} style={{ borderRadius: "20px" }} alt="readings gif" />
         </Grid>
         <Grid item xs={6}>
           <Typography variant="h2" fontWeight="900" sx={{}}>
@@ -23,7 +26,7 @@ const BottomLandingPage = () => {
           </Typography>
         </Grid>
       </Grid>
-      <Grid item container>
+      <Grid item container sx={{ py: 10 }}>
         <Grid item xs={6}>
           <Typography variant="h2" fontWeight="900">
             QUIZ GAME
@@ -34,12 +37,12 @@ const BottomLandingPage = () => {
           </Typography>
         </Grid>
         <Grid item xs={6}>
-          picture or gif
+          <Image src={QuizGif} style={{ borderRadius: "20px" }} alt="quiz gif" />
         </Grid>
       </Grid>
-      <Grid item container>
+      <Grid item container sx={{ py: 10 }}>
         <Grid item xs={6}>
-          picture or gif
+          <Image src={SandboxGif} style={{ borderRadius: "20px" }} alt="sandbox gif" />
         </Grid>
         <Grid item xs={6}>
           <Typography variant="h2" fontWeight="900">
