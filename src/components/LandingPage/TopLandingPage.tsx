@@ -1,18 +1,19 @@
-import { Grid, Typography, Button, Dialog } from "@mui/material";
+import { Grid, Typography, Button, Dialog, IconButton } from "@mui/material";
 import Image from "next/image";
 import educate from "../../assets/educate.svg";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { signIn } from "next-auth/react";
-
-const TopLandingPage = () => {
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+const TopLandingPage = ({ handleClick }: { handleClick: () => void }) => {
   return (
     <Grid
       container
       item
       sx={{
         backgroundColor: "#FE6812",
-        pt: 10,
+        pt: 5,
         height: "100vh",
+        alignItems: "center",
       }}
       textAlign="center"
     >
@@ -20,7 +21,7 @@ const TopLandingPage = () => {
         item
         container
         direction="column"
-        sx={{ py: 10, alignItems: "center" }}
+        sx={{ py: 5, alignItems: "center" }}
         spacing={3}
         xs={12}
         lg={6}
@@ -45,6 +46,7 @@ const TopLandingPage = () => {
             sx={{
               color: "white",
               fontWeight: 900,
+              p: 2,
             }}
           >
             Supplement your learning
@@ -61,8 +63,13 @@ const TopLandingPage = () => {
           </Button>
         </Grid>
       </Grid>
-      <Grid item xs={12} lg={6} sx={{ pb: 10 }}>
+      <Grid item xs={12} lg={6}>
         <Image src={educate} alt="Educator image" />
+      </Grid>
+      <Grid item xs={12} color="white" sx={{ alignSelf: "end" }}>
+        <IconButton color="inherit" onClick={handleClick}>
+          <KeyboardDoubleArrowDownIcon fontSize="large" />
+        </IconButton>
       </Grid>
     </Grid>
   );

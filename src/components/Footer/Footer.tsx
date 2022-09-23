@@ -28,7 +28,7 @@ const Footer = () => {
           Created by Arandeep Hayer
         </Typography>
       </Grid>
-      <Grid item color="white">
+      <Grid item>
         <Link target="_blank" href="https://github.com/ashayer" rel="noopener">
           <IconButton color="inherit">
             <GitHubIcon fontSize="large" />

@@ -11,7 +11,8 @@ const MiddleLandingPage = () => {
         textAlign: "center",
         justifyContent: "center",
         alignItems: "center",
-        p: 10,
+        py: 10,
+        px: 2,
       }}
     >
       <Grid item>
