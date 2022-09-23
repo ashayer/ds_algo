@@ -13,14 +13,16 @@ const TopLandingPage = () => {
         backgroundColor: "#FE6812",
         pt: 10,
       }}
+      textAlign="center"
     >
       <Grid
         item
         container
         direction="column"
-        sx={{ pt: 10, alignItems: "center" }}
+        sx={{ py: 10, alignItems: "center" }}
         spacing={3}
-        xs={6}
+        xs={12}
+        md={6}
       >
         <Grid item>
           <Typography
@@ -58,7 +60,7 @@ const TopLandingPage = () => {
           </Button>
         </Grid>
       </Grid>
-      <Grid item xs={6} sx={{ pb: 10 }}>
+      <Grid item xs={12} md={6} sx={{ pb: 10 }}>
         <Image src={educate} alt="Educator image" />
       </Grid>
     </Grid>
