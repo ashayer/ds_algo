@@ -8,6 +8,9 @@ import { NextPage } from "next";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 
+import educate from "../assets/educate.svg";
+import Image from "next/image";
+
 const LandingPage: NextPage = () => {
   const { data: session } = useSession();
   const router = useRouter();
@@ -19,20 +22,13 @@ const LandingPage: NextPage = () => {
   }
 
   return (
-    <Grid
-      container
-      direction="column"
-      sx={{
-        alignItems: "center",
-        marginInline: "auto",
-      }}
-      maxWidth="md"
-    >
-      <Grid item sx={{ mt: 10 }}>
-        <Button variant="contained" onClick={() => signIn("google", { callbackUrl: "/home" })}>
-          <Typography>GET STARTED</Typography>
-        </Button>
+    <Grid container direction="column" sx={{ overflowX: "hidden" }}>
+      <Grid item sx={{ backgroundColor: "#FE6812", height: "95vh", width: "100vw", pt: 10 }}>
+        <Typography variant="h1">DSALGO</Typography>
+        <Image src={educate} alt="Educator image" />
       </Grid>
+      <Grid item sx={{ backgroundColor: "#272838", height: "40vh", width: "100vw" }}></Grid>{" "}
+      <Grid item sx={{ backgroundColor: "#121212", height: "100vh", width: "100vw" }}></Grid>
     </Grid>
   );
 };
