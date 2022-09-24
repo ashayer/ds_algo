@@ -89,7 +89,7 @@ const StatsCard = () => {
           </GridCardItem>
           <GridCardItem alignSelf="end">
             <Link href="/leaderboard" passHref>
-              <Button variant="outlined" color="primary">
+              <Button variant="contained" color="primary">
                 <Typography variant="h4">Leaderboard</Typography>
               </Button>
             </Link>

@@ -53,7 +53,7 @@ const GameCard = () => {
         </GridCardItem>
         <GridCardItem alignSelf="end">
           <Link href="/game" passHref>
-            <Button variant="outlined" color="success">
+            <Button variant="contained" color="success">
               <Typography variant="h4">Play</Typography>
             </Button>
           </Link>
