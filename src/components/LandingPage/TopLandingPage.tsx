@@ -12,7 +12,7 @@ const TopLandingPage = ({ handleClick }: { handleClick: () => void }) => {
       sx={{
         backgroundColor: "#FE6812",
         pt: 5,
-        height: "100vh",
+        height: "95vh",
         alignItems: "center",
       }}
       textAlign="center"
@@ -55,7 +55,7 @@ const TopLandingPage = ({ handleClick }: { handleClick: () => void }) => {
         <Grid item>
           <Button
             variant="contained"
-            sx={{ borderRadius: "10px", p: 2 }}
+            sx={{ borderRadius: "10px", px: 2, py: 1 }}
             endIcon={<ArrowForwardIcon />}
             onClick={() => signIn("google", { callbackUrl: "/home" })}
           >

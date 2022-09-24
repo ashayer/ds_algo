@@ -22,7 +22,9 @@ const Navbar = () => {
           <Grid item>
             <Link href="/home" passHref>
               <MUILink sx={{ textDecoration: "none" }}>
-                <Typography variant="h2">DS ALGO</Typography>
+                <Typography variant="h2" color="secondary">
+                  DS ALGO
+                </Typography>
               </MUILink>
             </Link>
           </Grid>

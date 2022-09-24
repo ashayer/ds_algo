@@ -30,6 +30,9 @@ const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => 
       createTheme({
         palette: {
           mode,
+          secondary: {
+            main: "#FE6812",
+          },
         },
       }),
 

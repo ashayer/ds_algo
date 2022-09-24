@@ -73,6 +73,7 @@ const BottomLandingPage = () => {
       <Grid item>
         <Button
           variant="contained"
+          color="secondary"
           sx={{ borderRadius: "10px", p: 2 }}
           endIcon={<ArrowForwardIcon />}
           onClick={() => signIn("google", { callbackUrl: "/home" })}
