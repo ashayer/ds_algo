@@ -25,12 +25,17 @@ const HomeGridContainer = ({ children }: { children: JSX.Element[] }) => {
 
 const Home: NextPage = () => {
   return (
-    <HomeGridContainer>
-      <GameCard />
-      <StatsCard />
-      <AlgoCard />
-      <StructureCard />
-    </HomeGridContainer>
+    <>
+      <Head>
+        <title>Home</title>
+      </Head>
+      <HomeGridContainer>
+        <GameCard />
+        <StatsCard />
+        <AlgoCard />
+        <StructureCard />
+      </HomeGridContainer>
+    </>
   );
 };
 

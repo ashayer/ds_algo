@@ -8,6 +8,7 @@ import TopLandingPage from "../components/LandingPage/TopLandingPage";
 import MiddleLandingPage from "../components/LandingPage/MiddleLandingPage";
 import BottomLandingPage from "../components/LandingPage/BottomLandingPage";
 import Footer from "../components/Footer/Footer";
+import Head from "next/head";
 const LandingPage: NextPage = () => {
   const { data: session } = useSession();
   const router = useRouter();
@@ -25,6 +26,9 @@ const LandingPage: NextPage = () => {
 
   return (
     <Grid container direction="column" sx={{ overflowX: "hidden" }}>
+      <Head>
+        <title>Welcome!</title>
+      </Head>
       <TopLandingPage handleClick={handleClick} />
       <div ref={ref}>
         <MiddleLandingPage />

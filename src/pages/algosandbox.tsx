@@ -11,6 +11,7 @@ import * as codeString from "../assets/AlgoStrings";
 import CodeBlock from "../components/CodeBlock/CodeBlock";
 import { SelectChangeEvent } from "@mui/material/Select";
 import type { NextPage } from "next";
+import Head from "next/head";
 
 const AlgoSandbox: NextPage = () => {
   const [algorithm, setAlgorithm] = useState<string>("3");
@@ -119,6 +120,9 @@ const AlgoSandbox: NextPage = () => {
 
   return (
     <Grid item container sx={{ marginInline: "auto" }}>
+      <Head>
+        <title>Sandbox</title>
+      </Head>
       <SortOptions
         algorithm={algorithm}
         handleAlgoChange={handleAlgoChange}

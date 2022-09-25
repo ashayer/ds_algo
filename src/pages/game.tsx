@@ -9,6 +9,7 @@ import UserStatsTable from "../components/UserStatsTable/UserStatsTable";
 import produce from "immer";
 import { useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
+import Head from "next/head";
 
 const Game = () => {
   const { data: session } = useSession();
@@ -137,6 +138,9 @@ const Game = () => {
 
   return (
     <>
+      <Head>
+        <title>Game</title>
+      </Head>
       {gameStarted && questionDisplay ? (
         <Grid item container sx={{ marginInline: "auto" }}>
           <UserStatsTable sessionGameStats={sessionGameStats} />

@@ -6,6 +6,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import AlgoSectionArray from "../../utils/algoSectionReading";
 import StructureSectionArray from "../../utils/structureSectionReading";
 import type { NextPage } from "next";
+import Head from "next/head";
 
 const localStorageHelper = () => {
   if (typeof window !== "undefined") {
@@ -45,6 +46,9 @@ const AlgoReading: NextPage = () => {
 
   return (
     <Box maxWidth="xl" sx={{ marginInline: "auto", mt: 2 }}>
+      <Head>
+        <title>Algo Reading</title>
+      </Head>
       {sectionArray.length > 0 && (
         <>
           <SortingAlgorithmAccordion

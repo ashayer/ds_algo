@@ -6,6 +6,7 @@ import StructureSectionArray from "../../utils/structureSectionReading";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import DataStructureAccordion from "../../components/ReadingsGeneral/Accordion";
+import Head from "next/head";
 
 const localStorageHelper = () => {
   if (typeof window !== "undefined") {
@@ -45,6 +46,9 @@ const StructureReading: NextPage = () => {
 
   return (
     <Box maxWidth="xl" sx={{ marginInline: "auto", mt: 2 }}>
+      <Head>
+        <title>Structure Reading</title>
+      </Head>
       {sectionArray.length > 0 && (
         <>
           <DataStructureAccordion

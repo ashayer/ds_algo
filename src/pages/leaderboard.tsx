@@ -16,6 +16,7 @@ import {
 import { visuallyHidden } from "@mui/utils";
 import { NextPage } from "next";
 import { trpc } from "../utils/trpc";
+import Head from "next/head";
 
 function descendingComparator(a: any, b: any, orderBy: any) {
   if (b[orderBy] < a[orderBy]) {
@@ -85,6 +86,9 @@ function EnhancedTableHead(props: any) {
 
   return (
     <TableHead>
+      <Head>
+        <title>Leaderboard</title>
+      </Head>
       <TableRow>
         {headCells.map((headCell) => (
           <TableCell
