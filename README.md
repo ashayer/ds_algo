@@ -1,5 +1,5 @@
 <div align="center">
- <img src="src/assets/educate.svg"/>
+ <img src="src/assets/classroom.png" height="500" width="500"/>
  
   <a href="https://dsalgo.arandeep.com" target="_blank" rel="noopener noreferrer">Visit the site here!<a>
  
